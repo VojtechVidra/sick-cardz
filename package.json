@@ -1,0 +1,29 @@
+{
+  "name": "card-spring",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "deploy:firebase": "yarn build && firebase deploy"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.24",
+    "@types/react-dom": "^16.8.5",
+    "@types/styled-components": "^4.1.18",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-static-files-copy": "^2.2.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-spring": "^8.0.27",
+    "react-use-gesture": "^5.2.2",
+    "styled-components": "^4.3.2"
+  },
+  "prettier": {
+    "printWidth": 120
+  }
+}
