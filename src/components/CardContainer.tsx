@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const CardContainer = styled(animated.div)<Props>`
-  cursor: pointer;
+  cursor: url("hand.png"), auto;
   position: absolute;
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => `${width}px`};

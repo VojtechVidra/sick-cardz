@@ -36,7 +36,7 @@ export const App: React.FC = () => {
         return (
           <Card
             key={k}
-            style={{ zIndex: -currentZIndex + zIndexOrder.length }}
+            style={{ zIndex: zIndexOrder.length - currentZIndex }}
             stackIndex={i}
             cardType={Cards[k]}
             width={200}

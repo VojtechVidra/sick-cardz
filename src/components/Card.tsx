@@ -14,6 +14,8 @@ interface Props {
   style?: React.CSSProperties;
 }
 
+const getRandomRotate = (): number => Math.random() * 30 - 15;
+
 export const Card: React.FC<Props> = ({ cardType = Cards.CARD_2H, width = 40, stackIndex = 0, style, onMouseDown }) => {
   const height = width * 1.4;
   const borderRadius = width / 20;
@@ -21,9 +23,11 @@ export const Card: React.FC<Props> = ({ cardType = Cards.CARD_2H, width = 40, st
   const [folded, setFolded] = useState<boolean>(false);
   const [mouseStart, setMouseStart] = useState<[number, number]>([0, 0]);
   const [draging, setDraging] = useState<boolean>(false);
+  const [rotateZRand, setRotateZRand] = useState<number>(getRandomRotate());
 
   const { rotateY } = useSpring({ rotateY: folded ? 180 : 0 });
-  const { rotateX } = useSpring({ rotateX: draging ? 0 : 20 });
+  const { rotateX } = useSpring({ rotateX: draging ? 0 : 40 });
+  const { rotateZ } = useSpring({ rotateZ: draging ? 0 : rotateZRand });
 
   const [{ xy }, set] = useSpring(() => ({
     xy: [0, 0],
@@ -48,6 +52,7 @@ export const Card: React.FC<Props> = ({ cardType = Cards.CARD_2H, width = 40, st
   const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
     bindMouseUp && bindMouseUp(e);
     setDraging(false);
+    setRotateZRand(getRandomRotate());
     const [x, y] = getClientCors(e.nativeEvent);
     if (mouseStart[0] === x && mouseStart[1] === y) {
       setFolded(prev => !prev);
@@ -65,9 +70,9 @@ export const Card: React.FC<Props> = ({ cardType = Cards.CARD_2H, width = 40, st
         ...style,
         transform: interpolate(
           // @ts-ignore
-          [xy, rotateX],
-          ([x, y], r) =>
-            `translate(${x}px, ${y}px) rotateX(${r}deg) rotateZ(${stackIndex - 5}deg) translateZ(${stackIndex * 5}px)`
+          [xy, rotateX, rotateZ],
+          ([x, y], rotX, rotZ) =>
+            `translate(${x}px, ${y}px) rotateX(${rotX}deg) rotateZ(${rotZ}deg) translateZ(${stackIndex * 5}px)`
         )
       }}
     >
@@ -86,8 +91,7 @@ export const Card: React.FC<Props> = ({ cardType = Cards.CARD_2H, width = 40, st
         borderRadius={borderRadius}
         backgroundimageurl={`/card-svg/${Cards.CARD_RB}.svg`}
         style={{
-          transform: rotateY.interpolate(r => `rotateY(${r - 180}deg) translateZ(.5px)`),
-          backfaceVisibility: "hidden"
+          transform: rotateY.interpolate(r => `rotateY(${r - 180}deg) translateZ(.5px)`)
         }}
       />
     </CardContainer>

@@ -12,5 +12,18 @@ export enum Cards {
   CARD_JH = "JH",
   CARD_QH = "QH",
   CARD_KH = "KH",
+  CARD_AD = "AD",
+  CARD_2D = "2D",
+  CARD_3D = "3D",
+  CARD_4D = "4D",
+  CARD_5D = "5D",
+  CARD_6D = "6D",
+  CARD_7D = "7D",
+  CARD_8D = "8D",
+  CARD_9D = "9D",
+  CARD_TD = "TD",
+  CARD_JD = "JD",
+  CARD_QD = "QD",
+  CARD_KD = "KD",
   CARD_RB = "2B"
 }

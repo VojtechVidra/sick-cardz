@@ -17,5 +17,6 @@ export const AnimatedCard = styled(animated.div)<Props>`
   background-repeat: no-repeat;
   position: absolute;
   border-radius: ${({ borderRadius }) => `${borderRadius}px`};
-  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  box-shadow: 0 3px 25px -3px rgba(50, 50, 73, 0.4), 0 3px 3px -3px rgba(50, 50, 73, 0.3);
+  backface-visibility: hidden;
 `;
